@@ -44,7 +44,8 @@ class Login extends StatelessWidget {
                       color: Color(0xffF4F5F9),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 30, left: 16),
+                      padding:
+                          const EdgeInsets.only(top: 30, left: 16, right: 17),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -60,6 +61,35 @@ class Login extends StatelessWidget {
                                   fontWeight: FontWeight.w400,
                                   fontFamily: 'Poppins-Regular',
                                   color: Color(0xFF868889))),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(top: 16),
+                            color: Colors.black,
+                            width: MediaQuery.of(context).size.width,
+                            child: TextField(
+                              decoration: InputDecoration(
+                                contentPadding:
+                                    EdgeInsets.only(top: 19, right: 21),
+                                isDense: true,
+                                fillColor: Colors.white,
+                                filled: true,
+                                border: OutlineInputBorder(),
+                                hintText: 'Email Address',
+                                hintStyle: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: 'Poppins-Medium',
+                                    color: Color(0xFF868889)),
+                                prefixIcon: Image.asset(
+                                  'assets/images/email.png',
+                                  width: 20,
+                                  height: 20,
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
