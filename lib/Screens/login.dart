@@ -1,7 +1,4 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
@@ -48,12 +45,23 @@ class Login extends StatelessWidget {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.only(top: 30, left: 16),
-                      child: Text('Welcome back !',
-                          style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.w600,
-                              fontFamily: 'Poppins',
-                              color: Color(0xFF000000))),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Welcome back !',
+                              style: TextStyle(
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: 'Poppins',
+                                  color: Color(0xFF000000))),
+                          Text('Sign in to your account',
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w400,
+                                  fontFamily: 'Poppins-Regular',
+                                  color: Color(0xFF868889))),
+                        ],
+                      ),
                     ),
                   ))
             ],
