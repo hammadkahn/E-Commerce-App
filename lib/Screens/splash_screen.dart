@@ -34,7 +34,10 @@ class _SplashScreenState extends State<SplashScreen> {
                   padding: EdgeInsets.only(top: 96),
                   child: Text(
                     "Welcome to",
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
+                    style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: 'Poppins'),
                   ),
                 ),
                 Padding(
@@ -47,6 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w500,
+                      fontFamily: 'Poppins',
                       color: Color(0xff868889)),
                 ),
                 const Padding(
@@ -55,6 +59,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
+                          fontFamily: 'Poppins',
                           color: Color(0xff868889))),
                 ),
                 const Padding(
@@ -63,6 +68,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w700,
+                          fontFamily: 'Poppins',
                           color: Color(0xff6CC51D))),
                 )
               ],
