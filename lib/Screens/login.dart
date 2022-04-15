@@ -49,19 +49,19 @@ class Login extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Welcome back !',
+                          const Text('Welcome back !',
                               style: TextStyle(
                                   fontSize: 25,
                                   fontWeight: FontWeight.w600,
                                   fontFamily: 'Poppins',
                                   color: Color(0xFF000000))),
-                          Text('Sign in to your account',
+                          const Text('Sign in to your account',
                               style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.w400,
                                   fontFamily: 'Poppins-Regular',
                                   color: Color(0xFF868889))),
-                          SizedBox(
+                          const SizedBox(
                             height: 16,
                           ),
                           Container(
@@ -77,7 +77,7 @@ class Login extends StatelessWidget {
                                 filled: true,
                                 border: OutlineInputBorder(),
                                 hintText: 'Email Address',
-                                hintStyle: TextStyle(
+                                hintStyle: const TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: 'Poppins-Medium',
@@ -90,6 +90,7 @@ class Login extends StatelessWidget {
                               ),
                             ),
                           ),
+                          Text("second screeen"),
                         ],
                       ),
                     ),
