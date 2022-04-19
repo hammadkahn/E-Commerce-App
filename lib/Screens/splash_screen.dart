@@ -55,8 +55,9 @@ class _SplashScreenState extends State<SplashScreen> {
                       fontFamily: 'Poppins',
                       color: Color(0xff868889)),
                 ),
+                const Spacer(),
                 const Padding(
-                  padding: EdgeInsets.only(top: 557),
+                  padding: EdgeInsets.only(bottom: 6),
                   child: Text("P O W E R E D  B Y",
                       style: TextStyle(
                           fontSize: 15,
@@ -65,7 +66,7 @@ class _SplashScreenState extends State<SplashScreen> {
                           color: Color(0xff868889))),
                 ),
                 const Padding(
-                  padding: EdgeInsets.only(top: 6),
+                  padding: EdgeInsets.only(bottom: 31),
                   child: Text("T E C H  I D A R A",
                       style: TextStyle(
                           fontSize: 20,
