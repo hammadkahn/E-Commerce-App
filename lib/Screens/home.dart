@@ -1,9 +1,27 @@
 import 'package:flutter/Material.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+class Home extends StatefulWidget {
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  int activeIndex = 0;
+
+  Widget buildint() => AnimatedSmoothIndicator(
+        activeIndex: activeIndex,
+        count: 4,
+        effect: WormEffect(
+          activeDotColor: Colors.black,
+          dotColor: Colors.grey,
+          dotHeight: 10,
+          dotWidth: 10,
+          spacing: 5,
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -66,26 +84,42 @@ class Home extends StatelessWidget {
                     width: double.infinity,
                     height: 283,
                     /* color: Colors.black, */
-                    child: CarouselSlider(
-                        items: [
-                          Image.asset('assets/images/bigCart.png'),
-                          Image.asset('assets/images/login.png'),
-                          Image.asset('assets/images/signup.png'),
-                        ],
-                        options: CarouselOptions(
-                          height: MediaQuery.of(context).size.height,
-                          autoPlay: true,
-                          autoPlayInterval: Duration(seconds: 3),
-                          autoPlayAnimationDuration:
-                              Duration(milliseconds: 800),
-                          autoPlayCurve: Curves.fastOutSlowIn,
-                          enlargeCenterPage: true,
-                          viewportFraction: 0.9,
-                          initialPage: 0,
-                          enableInfiniteScroll: true,
-                          reverse: false,
-                          scrollDirection: Axis.horizontal,
-                        )),
+                    child: Stack(
+                      children: [
+                        CarouselSlider(
+                            items: [
+                              Image.asset('assets/images/banner1.png'),
+                              Image.asset('assets/images/bigCart.png'),
+                              Image.asset('assets/images/login.png'),
+                              Image.asset('assets/images/signup.png'),
+                            ],
+                            options: CarouselOptions(
+                              height: MediaQuery.of(context).size.height,
+                              autoPlay: true,
+                              autoPlayInterval: Duration(seconds: 3),
+                              autoPlayAnimationDuration:
+                                  Duration(milliseconds: 800),
+                              autoPlayCurve: Curves.fastOutSlowIn,
+                              enlargeCenterPage: true,
+                              viewportFraction: 0.9,
+                              initialPage: 0,
+                              enableInfiniteScroll: true,
+                              reverse: false,
+                              scrollDirection: Axis.horizontal,
+                              onPageChanged: (index, reason) {
+                                setState(() {
+                                  activeIndex = index;
+                                });
+                                print(index);
+                              },
+                            )),
+                        Positioned(
+                          bottom: 30,
+                          left: 16,
+                          child: buildint(),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Row(),
