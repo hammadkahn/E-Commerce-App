@@ -1,8 +1,7 @@
-// import 'dart:html';
-
 import 'package:flutter/Material.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/rendering.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Home extends StatefulWidget {
@@ -16,7 +15,7 @@ class _HomeState extends State<Home> {
   Widget buildint() => AnimatedSmoothIndicator(
         activeIndex: activeIndex,
         count: 4,
-        effect: WormEffect(
+        effect: const WormEffect(
           activeDotColor: Colors.green,
           dotColor: Colors.grey,
           dotHeight: 10,
@@ -27,6 +26,8 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    double carouselwidth = MediaQuery.of(context).size.width - 34;
+    double carouselheight = carouselwidth * 283 / 380;
     return SafeArea(
       top: false,
       child: Scaffold(
@@ -43,10 +44,11 @@ class _HomeState extends State<Home> {
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
-                        color: Color(0xffF4F5F9)),
+                        color: const Color(0xffF4F5F9)),
                     child: TextField(
                       decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(top: 14, bottom: 13),
+                        contentPadding:
+                            const EdgeInsets.only(top: 14, bottom: 13),
                         isDense: true,
                         // fillColor: Colors.white,
                         // filled: true,
@@ -65,7 +67,7 @@ class _HomeState extends State<Home> {
                             height: 20,
                           ),
                         ),
-                        prefix: SizedBox(width: 21),
+                        prefix: const SizedBox(width: 21),
                         suffixIcon: Padding(
                           padding: const EdgeInsets.only(right: 28),
                           child: Image.asset(
@@ -83,9 +85,9 @@ class _HomeState extends State<Home> {
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
-                        color: Color(0xffF4F5F9)),
-                    width: double.infinity,
-                    height: 283,
+                        color: const Color(0xffF4F5F9)),
+                    width: carouselwidth,
+                    height: carouselheight,
                     /* color: Colors.black, */
                     child: Stack(
                       children: [
@@ -97,15 +99,15 @@ class _HomeState extends State<Home> {
                               Image.asset('assets/images/signup.png'),
                             ],
                             options: CarouselOptions(
-                              height: MediaQuery.of(context).size.height,
+                              height: carouselheight,
                               // width: MediaQuery.of(context).size.width,
                               autoPlay: true,
-                              autoPlayInterval: Duration(seconds: 3),
+                              autoPlayInterval: const Duration(seconds: 3),
                               autoPlayAnimationDuration:
-                                  Duration(milliseconds: 800),
+                                  const Duration(milliseconds: 800),
                               autoPlayCurve: Curves.fastOutSlowIn,
                               enlargeCenterPage: true,
-                              viewportFraction: 0.9,
+                              viewportFraction: 1,
                               initialPage: 0,
                               enableInfiniteScroll: true,
                               reverse: false,
@@ -114,7 +116,6 @@ class _HomeState extends State<Home> {
                                 setState(() {
                                   activeIndex = index;
                                 });
-                                print(index);
                               },
                             )),
                         Positioned(
@@ -126,8 +127,8 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20),
+                const Padding(
+                  padding: EdgeInsets.only(top: 20),
                   child: Text("Categories",
                       textAlign: TextAlign.left,
                       style: TextStyle(
@@ -138,22 +139,94 @@ class _HomeState extends State<Home> {
                 ),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  child: Row(children: [
-                    Text("hello"),
-                    Text("hello"),
-                    Text("hello"),
-                    Text("hello"),
-                    Text("hello"),
-                    Text("hello"),
-                    Text("hello"),
-                    Text("hello"),
-                    Text("hello"),
-                    Text("hello"),
-                    Text("hello"),
-                    Text("hello"),
-                    Text("hello"),
-                    Text("hello"),
-                  ]),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                          //1
+                          width: 52,
+                          height: 52,
+                          decoration: BoxDecoration(
+                              color: const Color(0xffF4F5F9),
+                              shape: BoxShape.circle),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset('assets/images/veg.png'),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          //1
+                          width: 52,
+                          height: 52,
+                          decoration: BoxDecoration(
+                              color: const Color(0xffF4F5F9),
+                              shape: BoxShape.circle),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset('assets/images/fruit.png'),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          //1
+                          width: 52,
+                          height: 52,
+                          decoration: BoxDecoration(
+                              color: const Color(0xffF4F5F9),
+                              shape: BoxShape.circle),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset('assets/images/bev.png'),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          //1
+                          width: 52,
+                          height: 52,
+                          decoration: BoxDecoration(
+                              color: const Color(0xffF4F5F9),
+                              shape: BoxShape.circle),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset('assets/images/grocery.png'),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          //1
+                          width: 52,
+                          height: 52,
+                          decoration: BoxDecoration(
+                              color: const Color(0xffF4F5F9),
+                              shape: BoxShape.circle),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset('assets/images/oil.png'),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          //1
+                          width: 52,
+                          height: 52,
+                          decoration: BoxDecoration(
+                              color: const Color(0xffF4F5F9),
+                              shape: BoxShape.circle),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset('assets/images/hold.png'),
+                            ],
+                          ),
+                        ),
+                      ]),
                 ),
               ],
             ),
