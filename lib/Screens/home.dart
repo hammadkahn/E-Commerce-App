@@ -94,9 +94,9 @@ class _HomeState extends State<Home> {
                         CarouselSlider(
                             items: [
                               Image.asset('assets/images/banner1.png'),
-                              Image.asset('assets/images/bigCart.png'),
-                              Image.asset('assets/images/login.png'),
-                              Image.asset('assets/images/signup.png'),
+                              Image.asset('assets/images/banner1.png'),
+                              Image.asset('assets/images/banner1.png'),
+                              Image.asset('assets/images/banner1.png'),
                             ],
                             options: CarouselOptions(
                               height: carouselheight,
@@ -139,94 +139,142 @@ class _HomeState extends State<Home> {
                 ),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Container(
-                          //1
-                          width: 52,
-                          height: 52,
-                          decoration: BoxDecoration(
-                              color: const Color(0xffF4F5F9),
-                              shape: BoxShape.circle),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 17),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Column(
                             children: [
-                              Image.asset('assets/images/veg.png'),
+                              Container(
+                                  //1
+                                  width: 52,
+                                  height: 52,
+                                  decoration: BoxDecoration(
+                                      color: const Color(0xffF4F5F9),
+                                      shape: BoxShape.circle),
+                                  child: Image.asset('assets/images/veg.png')),
+                              Text("Vegetables",
+                                  style: TextStyle(
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: 'Poppins-Medium',
+                                      color: Color(0xFF868889))),
                             ],
                           ),
-                        ),
-                        Container(
-                          //1
-                          width: 52,
-                          height: 52,
-                          decoration: BoxDecoration(
-                              color: const Color(0xffF4F5F9),
-                              shape: BoxShape.circle),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset('assets/images/fruit.png'),
-                            ],
+                          Padding(
+                            padding: const EdgeInsets.only(left: 21),
+                            child: Column(
+                              children: [
+                                Container(
+                                  //1
+                                  width: 52,
+                                  height: 52,
+                                  decoration: BoxDecoration(
+                                      color: const Color(0xffF4F5F9),
+                                      shape: BoxShape.circle),
+                                  child: Image.asset('assets/images/fruit.png'),
+                                ),
+                                Text("Fruits",
+                                    style: TextStyle(
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: 'Poppins-Medium',
+                                        color: Color(0xFF868889))),
+                              ],
+                            ),
                           ),
-                        ),
-                        Container(
-                          //1
-                          width: 52,
-                          height: 52,
-                          decoration: BoxDecoration(
-                              color: const Color(0xffF4F5F9),
-                              shape: BoxShape.circle),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset('assets/images/bev.png'),
-                            ],
+                          Padding(
+                            padding: const EdgeInsets.only(left: 21),
+                            child: Column(
+                              children: [
+                                Container(
+                                  //1
+                                  width: 52,
+                                  height: 52,
+                                  decoration: BoxDecoration(
+                                      color: const Color(0xffF4F5F9),
+                                      shape: BoxShape.circle),
+                                  child: Image.asset('assets/images/bev.png'),
+                                ),
+                                Text("Beverages",
+                                    style: TextStyle(
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: 'Poppins-Medium',
+                                        color: Color(0xFF868889))),
+                              ],
+                            ),
                           ),
-                        ),
-                        Container(
-                          //1
-                          width: 52,
-                          height: 52,
-                          decoration: BoxDecoration(
-                              color: const Color(0xffF4F5F9),
-                              shape: BoxShape.circle),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset('assets/images/grocery.png'),
-                            ],
+                          Padding(
+                            padding: const EdgeInsets.only(left: 21),
+                            child: Column(
+                              children: [
+                                Container(
+                                  //1
+                                  width: 52,
+                                  height: 52,
+                                  decoration: BoxDecoration(
+                                      color: const Color(0xffF4F5F9),
+                                      shape: BoxShape.circle),
+                                  child:
+                                      Image.asset('assets/images/grocery.png'),
+                                ),
+                                Text("Grocery",
+                                    style: TextStyle(
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: 'Poppins-Medium',
+                                        color: Color(0xFF868889))),
+                              ],
+                            ),
                           ),
-                        ),
-                        Container(
-                          //1
-                          width: 52,
-                          height: 52,
-                          decoration: BoxDecoration(
-                              color: const Color(0xffF4F5F9),
-                              shape: BoxShape.circle),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset('assets/images/oil.png'),
-                            ],
+                          Padding(
+                            padding: const EdgeInsets.only(left: 21),
+                            child: Column(
+                              children: [
+                                Container(
+                                  //1
+                                  width: 52,
+                                  height: 52,
+                                  decoration: BoxDecoration(
+                                      color: const Color(0xffF4F5F9),
+                                      shape: BoxShape.circle),
+                                  child: Image.asset('assets/images/oil.png'),
+                                ),
+                                Text("Edible oil",
+                                    style: TextStyle(
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: 'Poppins-Medium',
+                                        color: Color(0xFF868889))),
+                              ],
+                            ),
                           ),
-                        ),
-                        Container(
-                          //1
-                          width: 52,
-                          height: 52,
-                          decoration: BoxDecoration(
-                              color: const Color(0xffF4F5F9),
-                              shape: BoxShape.circle),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset('assets/images/hold.png'),
-                            ],
+                          Padding(
+                            padding: const EdgeInsets.only(left: 21),
+                            child: Column(
+                              children: [
+                                Container(
+                                  //1
+                                  width: 52,
+                                  height: 52,
+                                  decoration: BoxDecoration(
+                                      color: const Color(0xffF4F5F9),
+                                      shape: BoxShape.circle),
+                                  child: Image.asset('assets/images/hold.png'),
+                                ),
+                                Text("Household",
+                                    style: TextStyle(
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: 'Poppins-Medium',
+                                        color: Color(0xFF868889))),
+                              ],
+                            ),
                           ),
-                        ),
-                      ]),
+                        ]),
+                  ),
                 ),
               ],
             ),
