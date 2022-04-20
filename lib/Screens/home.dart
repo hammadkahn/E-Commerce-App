@@ -135,10 +135,10 @@ class _HomeState extends State<Home> {
                     child: Text("Categories",
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                            fontFamily: 'Poppins-Medium',
-                            color: Color(0xFF868889))),
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: 'Poppins-SemiBold',
+                            color: Color(0xFF000000))),
                   ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
@@ -282,6 +282,76 @@ class _HomeState extends State<Home> {
                           ]),
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 32),
+                    child: Text("Featured products",
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: 'Poppins-SemiBold',
+                            color: Color(0xFF000000))),
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.only(top: 17),
+                      child: Container(
+                          height: 234,
+                          child: ListView(
+                              scrollDirection: Axis.horizontal,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 16),
+                                  child: Container(
+                                    width: 150,
+                                    height: 200,
+                                    decoration: BoxDecoration(
+                                        color: const Color(0xffF4F5F9),
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 16),
+                                          child: Image.asset(
+                                            'assets/images/fruit.png',
+                                            height: 100,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 16),
+                                          child: Text("Vegetables",
+                                              style: TextStyle(
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: 'Poppins-Medium',
+                                                  color: Color(0xFF868889))),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 16),
+                                          child: Text("Rs. 100",
+                                              style: TextStyle(
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: 'Poppins-Medium',
+                                                  color: Color(0xFF868889))),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                    padding: const EdgeInsets.only(left: 16),
+                                    child: Container(
+                                      width: 150,
+                                      height: 200,
+                                      decoration: BoxDecoration(
+                                          color: const Color(0xffF4F5F9),
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                    ))
+                              ])))
                 ],
               ),
             ),
