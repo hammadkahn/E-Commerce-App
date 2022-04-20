@@ -1,3 +1,5 @@
+// import 'dart:html';
+
 import 'package:flutter/Material.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -15,7 +17,7 @@ class _HomeState extends State<Home> {
         activeIndex: activeIndex,
         count: 4,
         effect: WormEffect(
-          activeDotColor: Colors.black,
+          activeDotColor: Colors.green,
           dotColor: Colors.grey,
           dotHeight: 10,
           dotWidth: 10,
@@ -34,6 +36,7 @@ class _HomeState extends State<Home> {
             padding: const EdgeInsets.only(left: 17, right: 17),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
                   padding: const EdgeInsets.only(top: 51),
@@ -95,6 +98,7 @@ class _HomeState extends State<Home> {
                             ],
                             options: CarouselOptions(
                               height: MediaQuery.of(context).size.height,
+                              // width: MediaQuery.of(context).size.width,
                               autoPlay: true,
                               autoPlayInterval: Duration(seconds: 3),
                               autoPlayAnimationDuration:
@@ -122,7 +126,35 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                 ),
-                Row(),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: Text("Categories",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: 'Poppins-Medium',
+                          color: Color(0xFF868889))),
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(children: [
+                    Text("hello"),
+                    Text("hello"),
+                    Text("hello"),
+                    Text("hello"),
+                    Text("hello"),
+                    Text("hello"),
+                    Text("hello"),
+                    Text("hello"),
+                    Text("hello"),
+                    Text("hello"),
+                    Text("hello"),
+                    Text("hello"),
+                    Text("hello"),
+                    Text("hello"),
+                  ]),
+                ),
               ],
             ),
           ),
