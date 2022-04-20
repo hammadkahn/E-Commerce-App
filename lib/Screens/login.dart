@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:e_commerce/Screens/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
