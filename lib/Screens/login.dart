@@ -1,9 +1,25 @@
+import 'dart:convert';
+
+import 'package:e_commerce/Screens/home.dart';
 import 'package:e_commerce/Screens/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:http/http.dart' as http;
 
-class Login extends StatelessWidget {
-  const Login({Key? key}) : super(key: key);
+import '../models/loginresponse.dart';
+
+class Login extends StatefulWidget {
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  UserData? userData;
+  bool isLoading = false;
+  String? error;
+  TextEditingController userCTRL = TextEditingController();
+
+  TextEditingController passCTRL = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -50,195 +66,294 @@ class Login extends StatelessWidget {
                       child: Padding(
                         padding:
                             const EdgeInsets.only(top: 30, left: 16, right: 17),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text('Welcome back !',
-                                style: TextStyle(
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.w600,
-                                    fontFamily: 'Poppins',
-                                    color: Color(0xFF000000))),
-                            const Text('Sign in to your account',
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w400,
-                                    fontFamily: 'Poppins-Regular',
-                                    color: Color(0xFF868889))),
-                            const SizedBox(
-                              height: 16,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: Colors.white),
-                              child: TextField(
-                                decoration: InputDecoration(
-                                  contentPadding:
-                                      EdgeInsets.only(top: 19, bottom: 18),
-                                  isDense: true,
-                                  // fillColor: Colors.white,
-                                  // filled: true,
-                                  border: InputBorder.none,
-                                  hintText: 'Email Address',
-                                  hintStyle: const TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: 'Poppins-Medium',
-                                      color: Color(0xFF868889)),
-                                  prefixIcon: Padding(
-                                    padding: const EdgeInsets.only(left: 28),
-                                    child: Image.asset(
-                                      'assets/images/email.png',
-                                      width: 20,
+                        child: !isLoading
+                            ? Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  if (error != null) Text("Error: $error"),
+                                  if (userData == null) ...[
+                                    const Text('Welcome back !',
+                                        style: TextStyle(
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.w600,
+                                            fontFamily: 'Poppins',
+                                            color: Color(0xFF000000))),
+                                    const Text('Sign in to your account',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w400,
+                                            fontFamily: 'Poppins-Regular',
+                                            color: Color(0xFF868889))),
+                                    const SizedBox(
+                                      height: 16,
+                                    ),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: Colors.white),
+                                      child: TextField(
+                                        controller: userCTRL,
+                                        decoration: InputDecoration(
+                                          contentPadding: EdgeInsets.only(
+                                              top: 19, bottom: 18),
+                                          isDense: true,
+                                          // fillColor: Colors.white,
+                                          // filled: true,
+                                          border: InputBorder.none,
+                                          hintText: 'Email Address',
+                                          hintStyle: const TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w500,
+                                              fontFamily: 'Poppins-Medium',
+                                              color: Color(0xFF868889)),
+                                          prefixIcon: Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 28),
+                                            child: Image.asset(
+                                              'assets/images/email.png',
+                                              width: 20,
+                                              height: 20,
+                                            ),
+                                          ),
+                                          prefix: SizedBox(width: 21),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 5),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                            color: Colors.white),
+                                        child: TextField(
+                                          controller: passCTRL,
+                                          decoration: InputDecoration(
+                                            contentPadding: EdgeInsets.only(
+                                                top: 19, bottom: 18),
+                                            isDense: true,
+                                            // fillColor: Colors.white,
+                                            // filled: true,
+                                            border: InputBorder.none,
+                                            hintText: 'Password',
+                                            hintStyle: const TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: 'Poppins-Medium',
+                                                color: Color(0xFF868889)),
+                                            prefixIcon: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 28),
+                                              child: Image.asset(
+                                                'assets/images/pass.png',
+                                                width: 20,
+                                                height: 20,
+                                              ),
+                                            ),
+                                            prefix: SizedBox(width: 21),
+                                            suffixIcon: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 28),
+                                              child: Image.asset(
+                                                'assets/images/eye.png',
+                                                width: 26.48,
+                                                height: 16.88,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 21, left: 10, right: 8),
+                                      child: Row(
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 4),
+                                            child: FlutterSwitch(
+                                              padding: 0,
+                                              width: 28.57,
+                                              height: 16,
+                                              toggleSize: 13,
+                                              switchBorder: Border.all(
+                                                  width: 1.5,
+                                                  color: Colors.white),
+                                              toggleBorder: Border.all(
+                                                  width: 1.5,
+                                                  color: Colors.grey),
+                                              inactiveColor: Colors.amber,
+                                              value: true,
+                                              onToggle: (val) => {},
+                                            ),
+                                          ),
+                                          const Padding(
+                                            padding:
+                                                EdgeInsets.only(left: 9.43),
+                                            child: Text(
+                                              "Remember me",
+                                              style: TextStyle(
+                                                  color: Color(0xFF868889),
+                                                  fontFamily: "Poppins-Medium",
+                                                  fontSize: 15),
+                                            ),
+                                          ),
+                                          const Spacer(),
+                                          const Text(
+                                            "Forgot password",
+                                            style: TextStyle(
+                                                color: Color(0xFF407EC7),
+                                                fontFamily: "Poppins-Medium",
+                                                fontSize: 15),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 17),
+                                      child: Center(
+                                          child: GestureDetector(
+                                              onTap: () {
+                                                login();
+                                                ;
+                                              },
+                                              child: Container(
+                                                alignment: Alignment.center,
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width,
+                                                height: 60,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                  //gradient
+                                                  gradient: LinearGradient(
+                                                    colors: [
+                                                      Color(0xFFAEDC81),
+                                                      Color(0xFF6CC51D),
+                                                    ],
+                                                    begin: Alignment.topLeft,
+                                                    end: Alignment.bottomRight,
+                                                  ),
+                                                ),
+                                                child: Text(
+                                                  "Login",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 15,
+                                                      fontFamily:
+                                                          "Poppins-SemiBold",
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                ),
+                                              ))),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 20),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          const Text(
+                                            'Don\'t have an account?',
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w400,
+                                                fontFamily: 'Poppins-Regular',
+                                                color: Color(0xFF868889)),
+                                          ),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          GestureDetector(
+                                            onTap: () {
+                                              Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                      builder: (_) =>
+                                                          signUp()));
+                                            },
+                                            child: const Text(
+                                              'Sign up',
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: 'Poppins-Medium',
+                                                  color: Colors.black),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                  if (userData != null)
+                                    //navigate to home page
+                                    ...[
+                                    const SizedBox(
                                       height: 20,
                                     ),
-                                  ),
-                                  prefix: SizedBox(width: 21),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 5),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: Colors.white),
-                                child: TextField(
-                                  decoration: InputDecoration(
-                                    contentPadding:
-                                        EdgeInsets.only(top: 19, bottom: 18),
-                                    isDense: true,
-                                    // fillColor: Colors.white,
-                                    // filled: true,
-                                    border: InputBorder.none,
-                                    hintText: 'Password',
-                                    hintStyle: const TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: 'Poppins-Medium',
-                                        color: Color(0xFF868889)),
-                                    prefixIcon: Padding(
-                                      padding: const EdgeInsets.only(left: 28),
-                                      child: Image.asset(
-                                        'assets/images/pass.png',
-                                        width: 20,
-                                        height: 20,
+                                    Center(
+                                      child: Text(
+                                        'Welcome ${userData?.email}',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily: 'Poppins-Medium',
+                                            color: Colors.black),
                                       ),
                                     ),
-                                    prefix: SizedBox(width: 21),
-                                    suffixIcon: Padding(
-                                      padding: const EdgeInsets.only(right: 28),
-                                      child: Image.asset(
-                                        'assets/images/eye.png',
-                                        width: 26.48,
-                                        height: 16.88,
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    Center(
+                                      child: Text(
+                                        'You are logged in successfully',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily: 'Poppins-Medium',
+                                            color: Colors.black),
                                       ),
                                     ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 21, left: 10, right: 8),
-                              child: Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 4),
-                                    child: FlutterSwitch(
-                                      padding: 0,
-                                      width: 28.57,
-                                      height: 16,
-                                      toggleSize: 13,
-                                      switchBorder: Border.all(
-                                          width: 1.5, color: Colors.white),
-                                      toggleBorder: Border.all(
-                                          width: 1.5, color: Colors.grey),
-                                      inactiveColor: Colors.amber,
-                                      value: true,
-                                      onToggle: (val) => {},
+                                    const SizedBox(
+                                      height: 20,
                                     ),
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.only(left: 9.43),
-                                    child: Text(
-                                      "Remember me",
-                                      style: TextStyle(
-                                          color: Color(0xFF868889),
-                                          fontFamily: "Poppins-Medium",
-                                          fontSize: 15),
+                                    Center(
+                                      child: Text(
+                                        'You will be redirected to home page',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily: 'Poppins-Medium',
+                                            color: Colors.black),
+                                      ),
                                     ),
-                                  ),
-                                  const Spacer(),
-                                  const Text(
-                                    "Forgot password",
-                                    style: TextStyle(
-                                        color: Color(0xFF407EC7),
-                                        fontFamily: "Poppins-Medium",
-                                        fontSize: 15),
-                                  ),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    Center(
+                                      child: Text(
+                                        'Please wait...',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily: 'Poppins-Medium',
+                                            color: Colors.black),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    Center(
+                                      child: CircularProgressIndicator(),
+                                    ),
+                                  ]
                                 ],
+                              )
+                            : Center(
+                                child: CircularProgressIndicator(),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 17),
-                              child: Container(
-                                height: 60,
-                                width: 380,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: const Color(0xff6CC51D)),
-                                child: const Padding(
-                                  padding: EdgeInsets.only(top: 18),
-                                  child: Text(
-                                    'Login',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w600,
-                                        fontFamily: 'Poppins-SemiBold',
-                                        color: Colors.white),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 20),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Text(
-                                    'Don\'t have an account?',
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w400,
-                                        fontFamily: 'Poppins-Regular',
-                                        color: Color(0xFF868889)),
-                                  ),
-                                  const SizedBox(
-                                    width: 5,
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (_) => signUp()));
-                                    },
-                                    child: const Text(
-                                      'Sign up',
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: 'Poppins-Medium',
-                                          color: Colors.black),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
                       ),
                     ))
               ],
@@ -247,5 +362,27 @@ class Login extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void login() async {
+    var url = Uri.parse('http://ishaqhassan.com:2000/user/signin');
+    setState(() {
+      isLoading = true;
+    });
+    try {
+      var response = await http
+          .post(url, body: {'email': userCTRL.text, 'password': passCTRL.text});
+      var responseJson = Loginresponse.fromJson(jsonDecode(response.body));
+      setState(() {
+        userData = responseJson.data;
+      });
+    } catch (e) {
+      setState(() {
+        error = e.toString();
+      });
+    }
+    setState(() {
+      isLoading = false;
+    });
   }
 }

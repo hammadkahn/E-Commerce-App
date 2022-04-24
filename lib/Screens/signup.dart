@@ -179,25 +179,32 @@ class signUp extends StatelessWidget {
                                       MaterialPageRoute(
                                           builder: (context) => Home()));
                                 },
-                                child: Container(
+                                child: Center(
+                                    child: Container(
+                                  alignment: Alignment.center,
+                                  width: MediaQuery.of(context).size.width,
                                   height: 60,
-                                  width: 380,
                                   decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      color: const Color(0xff6CC51D)),
-                                  child: const Padding(
-                                    padding: EdgeInsets.only(top: 18),
-                                    child: Text(
-                                      'SignUp',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w600,
-                                          fontFamily: 'Poppins-SemiBold',
-                                          color: Colors.white),
+                                    borderRadius: BorderRadius.circular(5),
+                                    //gradient
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Color(0xFFAEDC81),
+                                        Color(0xFF6CC51D),
+                                      ],
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
                                     ),
                                   ),
-                                ),
+                                  child: Text(
+                                    "Signup",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontFamily: "Poppins-SemiBold",
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                )),
                               ),
                             ),
                             Padding(
