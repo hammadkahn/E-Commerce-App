@@ -217,6 +217,13 @@ class _LoginState extends State<Login> {
                                           child: GestureDetector(
                                               onTap: () {
                                                 login();
+
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            Home()));
+
                                                 ;
                                               },
                                               child: Container(
@@ -287,68 +294,6 @@ class _LoginState extends State<Login> {
                                       ),
                                     ),
                                   ],
-                                  if (userData != null)
-                                    //navigate to home page
-                                    ...[
-                                    const SizedBox(
-                                      height: 20,
-                                    ),
-                                    Center(
-                                      child: Text(
-                                        'Welcome ${userData?.email}',
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: 'Poppins-Medium',
-                                            color: Colors.black),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 20,
-                                    ),
-                                    Center(
-                                      child: Text(
-                                        'You are logged in successfully',
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: 'Poppins-Medium',
-                                            color: Colors.black),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 20,
-                                    ),
-                                    Center(
-                                      child: Text(
-                                        'You will be redirected to home page',
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: 'Poppins-Medium',
-                                            color: Colors.black),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 20,
-                                    ),
-                                    Center(
-                                      child: Text(
-                                        'Please wait...',
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: 'Poppins-Medium',
-                                            color: Colors.black),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 20,
-                                    ),
-                                    Center(
-                                      child: CircularProgressIndicator(),
-                                    ),
-                                  ]
                                 ],
                               )
                             : Center(
